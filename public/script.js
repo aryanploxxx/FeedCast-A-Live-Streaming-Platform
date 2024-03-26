@@ -6,6 +6,8 @@ const state = {media: null}
 const socket = io()
 
 startButton.addEventListener('click', (e)=> {
+    e.preventDefault();
+    const rtmpserver = document.getElementById("servername").value;
     const mediaRecorder = new MediaRecorder(state.media, {
         audioBitsPerSecond: 128000, // 128 KBps
         videoBitsPerSecond: 2500000, // 250 KBps
@@ -25,6 +27,8 @@ startButton.addEventListener('click', (e)=> {
             now we need to send the stream inside ev.data to backend 
             binarystream just acts like a variable name, could be anything
         */
+        socket.emit('rtmpserverevent', rtmpserver)
+
     }
 
     mediaRecorder.start(25)

@@ -3,15 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <title>FeedCast - Live Streaming Platform</title>
 </head>
 <body>
-    <h1>streamyard clone</h1>
-    <div>
+    <div class="nav">
+        <img src="media/feedcast-logo.png">
+    </div>
+    <div id="page1">
         <video id="user-video" autoplay muted></video>
         <!-- Muted - So that user do not listen to his own voice -->
-        <button id="start-btn">Start</button>
+        <form id="input-link">
+            <input type="text" id="servername" placeholder="RTMP Server Link">
+            <button id="start-btn">Start Streaming</button>
+        </form>
+        
     </div>
+
+
+
     <script src="/socket.io/socket.io.js"></script>
     <!-- To make available socket.io on the frontend as well -->
     <script src="./script.js"></script>
