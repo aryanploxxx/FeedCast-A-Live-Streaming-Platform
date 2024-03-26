@@ -15,7 +15,7 @@ const io = new SocketIO(server)
 // Now we can use this 'io' to handle our socket events
 
 // These options we have provided to ffmpeg and set all the required values like framerate and bitrate
-const options = [
+let options = [
     '-i',
     '-',
     '-c:v', 'libx264',
@@ -33,10 +33,11 @@ const options = [
     '-b:a', '128k', // audio codec
     '-ar', 128000 / 4, //bitrate
     '-f', 'flv',
-    `rtmp://live.twitch.tv/app/live_1057675567_LZWYi7Ia6mWqr8zMGASvYqrCyf3gG9`,
+    // `rtmp://live.twitch.tv/app/live_1057675567_LZWYi7Ia6mWqr8zMGASvYqrCyf3gG9`,
     // Here we will provide the link of the RTMP server
     // We can also provide a path to a file if in case we want to record the video stream
 ];
+
 
 /*
     const ffmpegProcess = spawn('ffmpeg', options)
@@ -80,6 +81,9 @@ io.on('connection', socket => {
     /*
         Setting up ffmpeg on local pc is a hassle, so to avoid that situation we will use docker
     */
+   socket.on('rtmpserverevent', name => {
+        options.push(name)
+   })
 })
 
 server.listen(3000, () => console.log(`HTTP Server is runnning on PORT 3000`))
